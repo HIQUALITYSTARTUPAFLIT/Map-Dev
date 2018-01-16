@@ -2,16 +2,34 @@
 
 var MARKERS = [];
 var MAP
+var MYLOC;
 
 function initMap() {
     var uluru = { lat: -25.363, lng: 131.044 };
     MAP = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
+        zoom: 16,
         center: uluru,
         disableDefaultUI: true
     });
+
+    MYLOC = new google.maps.Marker({
+        clickable: false,
+        icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+            new google.maps.Size(22, 22),
+            new google.maps.Point(0, 18),
+            new google.maps.Point(11, 11)),
+        shadow: null,
+        zIndex: 999,
+        map: MAP// your google.maps.Map object
+    });
+
+
     navigator.geolocation.getCurrentPosition(position => {
         MAP.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+    });
+
+    navigator.geolocation.watchPosition(position => {
+        MYLOC.setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
     });
 }
 
@@ -36,8 +54,8 @@ function placeMarker(options) {
         position: { lat: options.lat || 0, lng: options.long || 0 },
         title: options.title || "",
         icon: {
-            url = options.icon.imageURL || "",
-            size = new google.maps.Size(options.icon.size.x, options.icon.size.y),
+            url: options.icon.imageURL || "",
+            size: new google.maps.Size(options.icon.size.x, options.icon.size.y),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(options.icon.size.x / 2, options.icon.size.y)
         }
