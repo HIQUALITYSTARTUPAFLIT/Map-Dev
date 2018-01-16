@@ -55,7 +55,7 @@ function placeMarker(options) {
         title: options.title || "",
         icon: {
             url: options.icon.imageURL || "",
-            size: new google.maps.Size(options.icon.size.x, options.icon.size.y),
+            size: new google.maps.Size(options.icon.size.x || 32, options.icon.size.y || 32),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(options.icon.size.x / 2, options.icon.size.y)
         }
