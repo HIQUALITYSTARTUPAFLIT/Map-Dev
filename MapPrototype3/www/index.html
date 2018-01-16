@@ -5,7 +5,7 @@
         Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
         For details, see http://go.microsoft.com/fwlink/?LinkID=617521
     -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
         
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta name="format-detection" content="telephone=no">
@@ -16,14 +16,14 @@
     </head>
     <body>
         <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
+            <div id="map"></div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <!-- The 'async' attribute is needed for RequireJS to work in a Windows app -->
         <script type="text/javascript" data-main="scripts/startup" src="lib/require.2.1.8.js" async></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzLXOmY3EHeAw9r2Axyv5UW9cyUpfsmPE&callback=initMap"></script>
+        <script type="text/javascript">
+            //console.log("Ready");
+        </script>
     </body>
 </html>
